@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ekorustika — Digitalni alati</title>
+  <meta name="theme-color" content="#050b16" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Ekorustika" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <script src="https://js.puter.com/v2/"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#070b08; --card:#101814; --line:#1c2a22; --green:#22e36a; --text:#e8f5ec; --muted:#8aa394; --white:#f4faf6; --glow:rgba(34,227,106,.18); }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+    a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+    header{position:sticky;top:0;z-index:40;background:rgba(7,11,8,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo-img{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#050b16}
+    .brand strong{display:block;font-size:13px;letter-spacing:.08em}
+    .brand span{display:block;font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+    .links{display:flex;gap:22px;font-size:13.5px;color:var(--muted)}
+    .links a.active,.links a:hover{color:var(--green)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .icon-btn,.avatar{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700}
+    .avatar{color:var(--green)}
+    .hero{padding:56px 0 28px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+    .eyebrow{color:var(--green);font-size:12px;letter-spacing:.16em;font-weight:600;margin-bottom:14px}
+    h1{font-size:48px;line-height:1.05;font-weight:800;letter-spacing:-.03em}
+    h1 em{font-style:normal;color:var(--green)}
+    .lede{margin-top:18px;color:var(--muted);max-width:460px;line-height:1.55}
+    .cta-row{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:12px 18px;font-weight:600;font-size:14px}
+    .btn-primary{background:var(--green);color:#06210e;box-shadow:0 0 28px var(--glow)}
+    .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+    .stats{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap}
+    .stat b{display:block;font-size:13px}.stat small{color:var(--muted);font-size:12px}
+    .how{padding:20px 0 40px}.how h2{font-size:28px;margin-bottom:8px}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+    .num{width:26px;height:26px;border-radius:50%;background:#16321f;color:var(--green);display:grid;place-items:center;font-size:12px;font-weight:700;margin-bottom:12px}
+    .work{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-bottom:48px}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+    .panel h2{font-size:22px;margin-bottom:6px}.hint{color:var(--muted);font-size:13.5px;margin-bottom:16px}
+    .drop{border:1.5px dashed #2d4a38;border-radius:14px;min-height:150px;display:grid;place-items:center;text-align:center;color:var(--muted);background:#0c1410;margin-bottom:14px}
+    .drop.drag{border-color:var(--green)}
+    .thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .thumbs img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+    label.field{display:block;font-size:13px;color:var(--muted);margin:10px 0 6px}
+    textarea{width:100%;background:#0c1410;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;font:inherit}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+    .chip{border:1px solid var(--line);background:#0c1410;border-radius:8px;padding:8px 10px;font-size:13px}
+    .chip input{accent-color:var(--green);margin-right:6px}
+    .btn-wide{width:100%;justify-content:center}
+    .result-top{display:grid;grid-template-columns:140px 1fr;gap:14px;margin-bottom:16px}
+    .result-top img{width:140px;height:96px;object-fit:cover;border-radius:10px;background:#1a1a1a}
+    .row{display:flex;justify-content:space-between;padding:8px 0;color:var(--muted);font-size:14px}
+    .total{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:12px;background:#0c1410;border-radius:10px;border:1px solid #1e3a28}
+    .total b{font-size:26px;color:var(--green)}
+    .note{font-size:12px;color:var(--muted);margin:12px 0}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .toast{position:fixed;bottom:20px;right:20px;background:#12301c;color:var(--green);border:1px solid #2a5538;padding:12px 16px;border-radius:10px;z-index:50}
+    .feats{padding:10px 0 60px}.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .feat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+    footer{border-top:1px solid var(--line);padding:22px 0 32px;color:var(--muted);font-size:12px}
+    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .pages{display:none}.pages.show{display:block;padding:40px 0 80px}
+    table{width:100%;border-collapse:collapse;margin-top:16px}
+    th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:14px}
+    th{color:var(--muted);font-weight:500}
+    @media(max-width:900px){.hero,.work,.steps,.grid6,.result-top{grid-template-columns:1fr}h1{font-size:32px}.links{display:none}}
+  </style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#" data-go="home"><img class="logo-img" src="favicon.svg" alt="Ekorustika" width="34" height="34" /><div><strong>EKORUSTIKA</strong><span>Digitalni alati</span></div></a>
+  <nav class="links">
+    <a href="#" class="active" data-go="home">AI Ponuda</a>
+    <a href="#" data-go="projekti">Projekti</a>
+    <a href="#" data-go="klijenti">Klijenti</a>
+    <a href="#" data-go="cjenici">Cjenici</a>
+    <a href="#" data-go="postavke">Postavke</a>
+  </nav>
+  <div class="nav-right"><button class="btn btn-primary" id="installBtn" style="display:none;padding:8px 12px;font-size:12px">Instaliraj app</button><div class="avatar">E</div></div>
+</div></header>
+<main id="home" class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">AI PONUDA</div>
+      <h1>Profesionalna ponuda u manje od <em>60 sekundi.</em></h1>
+      <p class="lede">Učitaj fotografije, opiši radove — AI izradi ponudu s troškovnikom.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">Generiraj ponudu</button>
+        <button class="btn btn-ghost" onclick="demo()">Pogledaj demo</button>
+      </div>
+      <div class="stats"><div class="stat"><b>Brže ponude</b><small>Uštedi vrijeme</small></div><div class="stat"><b>Točnije procjene</b><small>AI analiza</small></div></div>
+    </div>
+    <div></div>
+  </section>
+  <section class="how"><h2>Kako to radi?</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Učitaj fotografije</h3><p class="hint">Slika prostora.</p></div>
+      <div class="step"><div class="num">2</div><h3>AI analizira</h3><p class="hint">Materijal i količine.</p></div>
+      <div class="step"><div class="num">3</div><h3>Troškovnik</h3><p class="hint">Materijal, rad, rok.</p></div>
+      <div class="step"><div class="num">4</div><h3>PDF ponuda</h3><p class="hint">Pošalji klijentu.</p></div>
+    </div>
+  </section>
+  <section class="work" id="work">
+    <div class="panel">
+      <h2>Nova AI ponuda</h2>
+      <div class="drop" id="drop">Povuci slike ovdje ili klikni<br><small>JPG PNG HEIC</small><input type="file" id="files" accept="image/*" multiple hidden /></div>
+      <div class="thumbs" id="thumbs"></div>
+      <label class="field">Opis radova</label>
+      <textarea id="opis" rows="3" placeholder="Zidne obloge, cca 25 m2..."></textarea>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" checked value="Zidne obloge" /> Zidne obloge</label>
+        <label class="chip"><input type="checkbox" checked value="Knauf" /> Knauf</label>
+        <label class="chip"><input type="checkbox" value="Dekor paneli" /> Dekor paneli</label>
+        <label class="chip"><input type="checkbox" value="Drugo" /> Drugo</label>
+      </div>
+      <button class="btn btn-primary btn-wide" onclick="analyze()">Pokreni AI analizu</button>
+    </div>
+    <div class="panel">
+      <h2>Rezultat</h2>
+      <p class="hint" id="aiStatus">Vision model spreman.</p>
+      <div class="result-top"><img id="preview" alt="" src="favicon.svg" /><ul id="elements" style="list-style:none;line-height:1.7"><li>Zidne obloge</li><li>Površina: 24 m²</li><li>2 dana</li></ul></div>
+      <div class="row"><span>Materijal</span><span id="mat">850,00 €</span></div>
+      <div class="row"><span>Rad</span><span id="rad">600,00 €</span></div>
+      <div class="row"><span>Dodatno</span><span id="add">0,00 €</span></div>
+      <div class="total"><span>Ukupno</span><b id="sum">1.450,00 €</b></div>
+      <button class="btn btn-primary btn-wide" onclick="makePdf()">Generiraj PDF</button>
+      <div class="actions"><button class="btn btn-ghost btn-wide" onclick="toast('Spremno za slanje')">Pošalji</button><button class="btn btn-ghost btn-wide" onclick="saveProject()">Spremi</button></div>
+    </div>
+  </section>
+</main>
+<section class="wrap pages" id="projekti"><h1>Projekti</h1><table><thead><tr><th>ID</th><th>Opis</th><th>Iznos</th></tr></thead><tbody id="projBody"><tr><td>ER-1042</td><td>TV zid lamele</td><td>1.450 €</td></tr></tbody></table></section>
+<section class="wrap pages" id="klijenti"><h1>Klijenti</h1><p class="hint">Privatni i poslovni.</p></section>
+<section class="wrap pages" id="cjenici"><h1>Cjenici</h1><table><tr><th>Stavka</th><th>Cijena</th></tr><tr><td>Lamele m²</td><td>38–55 €</td></tr><tr><td>Montaža m²</td><td>22–32 €</td></tr><tr><td>TV nosač</td><td>80–140 €</td></tr></table></section>
+<section class="wrap pages" id="postavke"><h1>Postavke</h1><p>EKORUSTIKA · Zagreb · jamstvo 30 dana</p></section>
+<footer><div class="wrap foot"><div class="brand"><img class="logo-img" src="favicon.svg" width="34" height="34" alt="" /><div><strong>EKORUSTIKA</strong><span>Digitalni alati</span></div></div><div>Ekorustika OS v1.0</div></div></footer>
+<script>
+const drop=document.getElementById('drop'),fileInput=document.getElementById('files'),thumbs=document.getElementById('thumbs');
+let imageFiles=[];
+drop.onclick=()=>fileInput.click();
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('drag')};
+drop.ondragleave=()=>drop.classList.remove('drag');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('drag');addFiles(e.dataTransfer.files)};
+fileInput.onchange=e=>addFiles(e.target.files);
+function addFiles(list){[...list].forEach(f=>{if(!f.type.startsWith('image/'))return;imageFiles.push(f);const u=URL.createObjectURL(f);const img=document.createElement('img');img.src=u;thumbs.appendChild(img);document.getElementById('preview').src=u})}
+function fmt(n){return n.toLocaleString('hr-HR',{minimumFractionDigits:2})+' \u20ac'}
+function apply(d,src){const els=d.elementi||[];document.getElementById('mat').textContent=fmt(+d.materijal_eur||0);document.getElementById('rad').textContent=fmt(+d.rad_eur||0);document.getElementById('add').textContent=fmt(+d.dodatno_eur||0);document.getElementById('sum').textContent=fmt(+d.ukupno_eur||0);document.getElementById('elements').innerHTML=els.map(t=>'<li>'+t+'</li>').join('')+'<li>Povr\u0161ina: '+(d.povrsina_m2||24)+' m\u00b2</li><li>'+(d.dani||2)+' dana</li>';document.getElementById('aiStatus').textContent=src}
+function localEst(){const types=[...document.querySelectorAll('.chip input:checked')].map(i=>i.value);const opis=document.getElementById('opis').value;const m2=Number((opis.match(/(\d+(?:[.,]\d+)?)\s*m/i)||[,24])[1].toString().replace(',','.'));const mat=Math.round(m2*35.4),rad=Math.round(m2*25),add=types.includes('Knauf')?80:0;return{elementi:types.length?types:['Zidne obloge'],povrsina_m2:m2,dani:m2>30?3:2,materijal_eur:mat,rad_eur:rad,dodatno_eur:add,ukupno_eur:mat+rad+add}}
+function extractJson(t){if(!t)return null;const c=String(t).replace(/```json|```/g,'').trim();const a=c.indexOf('{'),b=c.lastIndexOf('}');try{return JSON.parse(c.slice(a,b+1))}catch{return null}}
+function replyText(res){if(!res)return'';if(typeof res==='string')return res;if(res.message&&typeof res.message.content==='string')return res.message.content;return res.text||String(res)}
+async function analyze(){const opis=document.getElementById('opis').value;const types=[...document.querySelectorAll('.chip input:checked')].map(i=>i.value);document.getElementById('aiStatus').textContent='AI čita fotografiju…';toast('Pokrećem vision model');const prompt='Ti si Ekorustika OS. Vrati SAMO JSON: {"elementi":[],"povrsina_m2":24,"dani":2,"materijal_eur":850,"rad_eur":600,"dodatno_eur":0,"ukupno_eur":1450}. Opis: '+(opis||'-')+' Vrste: '+types.join(', ')+' Zagreb 2026 cijene.';try{if(typeof puter==='undefined'||!puter.ai)throw 0;const file=imageFiles[imageFiles.length-1];const res=file?await puter.ai.chat(prompt,file,{model:'gpt-5.4-nano'}):await puter.ai.chat(prompt,{model:'gpt-5.4-nano'});const data=extractJson(replyText(res));if(!data)throw 0;apply(data,'Vision model gotov.');toast('AI analiza gotova')}catch(e){apply(localEst(),'Lokalna procjena');toast('Rezervna procjena')}}
+function makePdf(){const w=window.open('','_blank');w.document.write('<h1>EKORUSTIKA — Ponuda</h1><p>'+document.getElementById('elements').innerText+'</p><h2>'+document.getElementById('sum').textContent+'</h2>');w.document.close();w.print()}
+function saveProject(){const t=document.getElementById('projBody');const id='ER-'+(1042+t.children.length);t.insertAdjacentHTML('beforeend','<tr><td>'+id+'</td><td>'+(document.getElementById('opis').value||'AI ponuda')+'</td><td>'+document.getElementById('sum').textContent+'</td></tr>');toast(id+' spremljen')}
+function demo(){document.getElementById('opis').value='Zidne obloge, hrastove lamele, 24 m2, TV i LED.';analyze();document.getElementById('work').scrollIntoView({behavior:'smooth'})}
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2200)}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+let deferred=null;const ib=document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;ib.style.display='inline-flex'});
+ib.onclick=async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;ib.style.display='none'};
+document.querySelectorAll('[data-go]').forEach(a=>a.onclick=e=>{e.preventDefault();const id=a.getAttribute('data-go');document.getElementById('home').style.display=id==='home'?'block':'none';document.querySelectorAll('.pages').forEach(p=>p.classList.remove('show'));if(id!=='home')document.getElementById(id).classList.add('show');window.scrollTo({top:0})});
+</script>
+</body></html>
